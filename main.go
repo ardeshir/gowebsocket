@@ -12,9 +12,9 @@ var ROOT_DIR = "/var/www/html/websocket"
 
 func Temp(ws *websocket.Conn) {
 	for {
-		msg, _ := exec.Command("date").Output()
-		fmt.Println("Sending to client: " + string(msg[:]) )
-		err := websocket.Message.Send(ws, string(msg[:]) )
+		msg, _ := exec.Command("netstat", "-lp").Output()
+		// fmt.Println("Sending to client: " + string(msg) )
+		err := websocket.Message.Send(ws, string(msg) )
 		if err != nil {
 			fmt.Println("Can't send")
 			break

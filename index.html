@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title> Go WebSocker</title>
+		
+<script type="text/javascript">
+	function WebSocketTest(){
+		if("WebSocket" in window) {
+		  console.log("WebSocket is supported by your browser!");
+			// let us open a web socket
+			var ws = new WebSocket("ws://localhost:12345"/Temp");
+		
+			ws.onopen = function() {
+			console.log("WS is open...")
+			};
+
+			ws.onmessage = function(evt) {
+			var receive_msg = evt.data ;
+			// uncomment next line if you want to get alerts on each message
+			// console.log("Message is received..." + received_msg);
+			document.getElementById("temp").innerHTML = "<pre>" + received_msg + "</pre>";
+			ws.send("Message received")
+			};
+	
+			ws.onclose = function(){
+			// websocket is closed
+			console.log("Connection is closed...");
+			};
+		} else {
+			// The browser doesn't support WebSocket
+			console.log("WebSocket NOT supported by your browser!");
+		}
+</script>
+</head>
+	<body>
+	<div id="temp">
+		<a href="javascript:WebSocketTest()"> run temp sensor</a>
+	</div>
+	</body>
+</html>
+
+
+	      

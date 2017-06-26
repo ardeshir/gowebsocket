@@ -12,11 +12,11 @@ var ROOT_DIR = "/var/www/html/websocket"
 
 func Temp(ws *websocket.Conn) {
 	for {
-		msg, _ := exec.Command("netstat", "-lp").Output()
+		msg, _ := exec.Command("tail","-200","/var/log/amazon/ssm/amazon-ssm-agent.log").Output()
 		// fmt.Println("Sending to client: " + string(msg) )
 		err := websocket.Message.Send(ws, string(msg) )
 		if err != nil {
-			fmt.Println("Can't send")
+			// fmt.Println("Can't send")
 			break
 		}
 		time.Sleep(2 * 1000 * 1000 * 1000)
@@ -24,10 +24,10 @@ func Temp(ws *websocket.Conn) {
 		var reply string
 		err = websocket.Message.Receive(ws, &reply)
 		if err != nil {
-			fmt.Println("Can't receive")
+			// fmt.Println("Can't receive")
 			break
 		}
-		fmt.Println("Received back from Client: " + reply)
+		// fmt.Println("Received back from Client: " + reply)
 	} // end for
 } // end Temp
 
